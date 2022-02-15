@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>My Simple Alarm</title>
+    <link rel="stylesheet" href="alarm.css">
+</head>
+<body>
+    <div class="one">
+
+        <h1>My Reminder Software <sup>@MJAY.SQI|2022</sup></h1>  
+    
+    </div>
+        
+        <div class="containerMain">
+        <div class="two container">
+            <div>
+            <h3>Set your current time</h3> <br>
+    Year: <input type="number" id="defaultYear" placeholder="0"> 
+    Month: <input type="number" id="defaultMonth" placeholder="0"> 
+    Days: <input type="number" id="defaultDay" placeholder="0"> <br>    
+    Hour: <input type="number" id="defaultHour" placeholder="0"> 
+    Minute: <input type="number" id="defaultMinute" placeholder="0"> 
+    Second: <input type="number" id="defaultSecond" placeholder="0">
+
+    <br><br>
+
+    <button class="button" id="get" onclick="getDate()">Get My Current Date</button>
+        </div>
+
+            <div>
+
+                <br><br>
+            <h3>Now set your alarm</h3> <br>
+    Year: <input type="number" id="year" placeholder="0"> 
+    Month: <input type="number" id="month" placeholder="0"> 
+    Days: <input type="number" id="day" placeholder="0"> <br>    
+    Hour: <input type="number" id="hour" placeholder="0"> 
+    Minute: <input type="number" id="minutes" placeholder="0"> 
+    Second: <input type="number" id="seconds" placeholder="0">
+
+    <br><br>
+
+    <button class="button" id="start" onclick="startAlarm()">Set Reminder</button>
+        </div>
+</div>
+</div>
+    <script>
+
+    
+        //var startTime = document.getElementById("start");
+       
+        function getDate (){
+            const d = new Date();
+            defaultYear.value = d.getFullYear();
+            defaultMonth.value = d.getMonth();
+            defaultDay.value = d.getDate();
+            defaultHour.value = d.getHours();
+            defaultMinute.value = d.getMinutes();
+            defaultSecond.value = d.getSeconds();
+        }
+
+        function setAlarm () {
+            if (year.value == "" && month.value == "" && day.value == "" && hour.value == "" && minutes.value == "" && seconds.value == "") {
+                 alert("Pls input a valid number")
+            }else 
+            if (defaultSecond.value < 60) {
+                defaultSecond.value++;
+            }  
+            if (defaultMinute.value != 60 && defaultSecond.value == 60) {
+                defaultSecond.value = 0; 
+                defaultMinute.value++;    
+            } 
+            if (defaultHour.value < 24 && defaultMinute.value == 60 && defaultSecond.value == 60) {
+                defaultSecond.value = 0;
+                defaultMinute.value = 0;
+                defaultHour.value++;
+            }
+             if (defaultDay != 30 && defaultHour.value ==24 && defaultMinute.value == 60 && defaultSecond.value == 60) {
+                defaultSecond.value = 0;
+                defaultMinute.value = 0;
+                defaultHour.value = 0;
+                defaultDay++;
+            }
+             if (defaultMonth != 12 && defaultDay == 30 && defaultHour.value ==24 && defaultMinute.value == 60 && defaultSecond.value == 60) {
+                defaultSecond.value = 0;
+                defaultMinute.value = 0;
+                defaultHour.value = 0;
+                defaultDay.value = 0;
+                defaultMonth++;
+            }
+            if (defaultMonth == 12 && defaultDay == 30 && defaultHour.value ==24 && defaultMinute.value == 60 && defaultSecond.value == 60) {
+                defaultSecond.value = 0;
+                defaultMinute.value = 0;
+                defaultHour.value = 0;
+                defaultDay.value = 0;
+                defaultMonth.value = 0;
+                defaultYear++;
+            }
+            
+        }
+
+        function startAlarm () {
+            
+                const startTimer =  setInterval(function () {
+                    setAlarm();
+                }, 1000);   
+        }
+
+        function stopIt() {
+            var x = seconds.value;
+            var y = minutes.value;
+            var z = hour.value;
+
+            if (seconds.value > 0) {
+                hour.value = z;
+                minutes.value = y;
+                seconds. value = x;
+            }
+            
+        }
+
+            function reset () {
+
+                if (seconds.value > 0) {
+                    seconds.value = 0;
+                }
+                if (hour.value > 0) {
+                    hour.value = 0;
+                }
+                if (minutes.value > 0) {
+                    minutes.value = 0;
+                }
+
+                
+            }
+        
+        
+        //  function startIt (){
+        //     // function startInterval() {
+        //     //     alert('yes');
+               
+        //     //}
+        //     start.disable = false;
+        //     //startInterval();
+        // }
+        
+
+        //  function stopTime () { 
+
+           
+        // }
+        // function resetTime () {
+    
+        // }
+        
+    </script>
+   
+
+
+</body>
+</html>
